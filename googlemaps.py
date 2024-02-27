@@ -56,13 +56,13 @@ class GoogleMapsScraper:
         tries = 0
         while not clicked and tries < MAX_RETRY:
             try: 
-                menu_bt = wait.until(EC.element_to_be_clickable((By.XPATH, '//button[@data-value=\'Sort\']'))) # Default menu_bt for the urls that start with https://www.google.com/maps/place/
-
                 if (url.startswith("https://maps.google.com")):
-                    review_tab = self.driver.find_element(By.XPATH, "//button[.//div[contains(text(),'Reviews')]]")
+                    review_tab = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[.//div[contains(text(),'Reviews')]]")))
                     # print(review_tab.text)
                     review_tab.click()
                     menu_bt = wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[3]/div[8]/div[9]/div/div/div[1]/div[2]/div/div[1]/div/div/div[4]/div[9]/button[2]')))
+                else:
+                    menu_bt = wait.until(EC.element_to_be_clickable((By.XPATH, '//button[@data-value=\'Sort\']'))) # Default menu_bt for the urls that start with https://www.google.com/maps/place/
                 
                 menu_bt.click()
 
